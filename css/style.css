@@ -170,9 +170,6 @@ main {
 }
 
 .slide__text { max-width: 560px; }
-.slide__text--wide { max-width: 720px; }
-
-.slide__inner--hero { grid-template-columns: 1fr; }
 
 .eyebrow, .tag {
   font-family: 'Archivo', sans-serif;
