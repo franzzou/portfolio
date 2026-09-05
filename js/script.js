@@ -9,6 +9,30 @@
 
   progressTotal.textContent = String(slides.length).padStart(2, '0');
 
+  // Decorative section index numbers
+  slides.forEach((slide, i) => {
+    const el = document.createElement('span');
+    el.className = 'slide__index';
+    el.setAttribute('aria-hidden', 'true');
+    el.textContent = String(i + 1).padStart(2, '0');
+    slide.prepend(el);
+  });
+
+  // Scroll reveal
+  const revealTargets = document.querySelectorAll('.slide__text, .slide__media');
+  revealTargets.forEach(el => el.classList.add('reveal'));
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  revealTargets.forEach(el => revealObserver.observe(el));
+
   // Mobile nav toggle
   navToggle.addEventListener('click', () => {
     const isOpen = navLinks.classList.toggle('is-open');
